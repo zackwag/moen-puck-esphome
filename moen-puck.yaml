@@ -1,0 +1,148 @@
+esphome:
+  name: !secret device_name
+  friendly_name: !secret friendly_name
+  project:
+    name: "custom.moen-puck"
+    version: "3.0.0"
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  ap:
+    ssid: "MoenPuck-Fallback"
+    password: !secret ap_password
+
+captive_portal:
+
+logger:
+  level: WARN
+
+api:
+  encryption:
+    key: !secret api_key
+
+ota:
+  - platform: esphome
+
+web_server:
+  port: 80
+
+output:
+  - platform: ledc
+    pin:
+      number: 13
+      inverted: true
+    id: led_red_output
+    frequency: 1000Hz
+
+  - platform: ledc
+    pin:
+      number: 12
+      inverted: true
+      ignore_strapping_warning: true
+    id: led_blue_output
+    frequency: 1000Hz
+
+  - platform: ledc
+    pin: 18
+    id: buzzer_output
+    frequency: 2000Hz
+
+light:
+  - platform: monochromatic
+    name: "LED Red"
+    output: led_red_output
+    id: led_red
+
+  - platform: monochromatic
+    name: "LED Blue"
+    output: led_blue_output
+    id: led_blue
+
+switch:
+  - platform: output
+    name: "Buzzer"
+    output: buzzer_output
+
+sensor:
+  - platform: adc
+    pin: 32
+    name: "Battery Voltage"
+    id: battery_voltage
+    update_interval: 300s
+    attenuation: 12db
+    unit_of_measurement: "V"
+    accuracy_decimals: 2
+    internal: true
+
+  - platform: template
+    name: "Battery"
+    unit_of_measurement: "%"
+    device_class: battery
+    accuracy_decimals: 0
+    update_interval: 300s
+    lambda: |-
+      float v = id(battery_voltage).state;
+      float pct = (v - 1.8f) / (3.0f - 1.8f) * 100.0f;
+      if (pct > 100.0f) pct = 100.0f;
+      if (pct < 0.0f) pct = 0.0f;
+      return pct;
+
+  - platform: adc
+    pin: 33
+    name: "Sensor Power Rail"
+    update_interval: 30s
+    attenuation: 12db
+    unit_of_measurement: "V"
+    accuracy_decimals: 2
+    internal: true
+
+  - platform: adc
+    pin: 35
+    name: "Humidity"
+    update_interval: 30s
+    attenuation: 12db
+    unit_of_measurement: "%"
+    device_class: humidity
+    accuracy_decimals: 1
+    filters:
+      - calibrate_linear:
+          - 0.155 -> 61.0
+          - 0.577 -> 95.0
+
+  - platform: wifi_signal
+    name: "WiFi Signal"
+    update_interval: 300s
+
+  - platform: uptime
+    name: "Uptime"
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: 27
+      mode: INPUT
+    name: "Water Detected"
+    device_class: moisture
+
+  - platform: gpio
+    pin:
+      number: 34
+      mode: INPUT
+    name: "Button"
+    filters:
+      - delayed_on: 10ms
+      - delayed_off: 10ms
+
+text_sensor:
+  - platform: version
+    name: "Firmware Version"
+
+  - platform: wifi_info
+    ip_address:
+      name: "IP Address"

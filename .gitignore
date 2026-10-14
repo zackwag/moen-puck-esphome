@@ -1,0 +1,23 @@
+# OS
+.DS_Store
+
+# Logs
+*.log
+
+# Environment / secrets
+.env*
+/secrets.yaml
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# ESPHome
+/.esphome/
+*.bin
+
+# Build
+dist/
+build/
+node_modules/
