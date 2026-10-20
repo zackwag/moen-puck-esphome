@@ -32,15 +32,9 @@ jobs:
           fail_level: error
           filter_mode: nofilter
 
-  esphome:
-    name: ESPHome Config
+  ruff:
+    name: Ruff
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - run: pip install esphome
-      - run: |
-          cp secrets.yaml.example secrets.yaml
-          esphome config moen-puck.yaml
+      - uses: astral-sh/ruff-action@v3

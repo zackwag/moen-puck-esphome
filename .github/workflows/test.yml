@@ -12,11 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
-      - run: pip install esphome
-      - name: Validate ESPHome config compiles
+      - run: pip install -r requirements.txt
+      - name: Import scripts
         run: |
-          cp secrets.yaml.example secrets.yaml
-          esphome compile moen-puck.yaml
+          python -c "import moen_puck_onboard, puck_fw_update"
