@@ -337,6 +337,11 @@ def check_and_update_firmware(puck_props):
     except requests.exceptions.ConnectionError:
         print("  Connection lost during upload — puck may be rebooting.")
 
+    # The puck's AP goes down while it reboots, so the Mac drops off it.
+    ap_ssid = puck_props.get("wifi_ap_ssid") or "FloDetector-XXXX"
+    print("\n  The puck is rebooting, which disconnects your Mac from its WiFi.")
+    print(f"  ➜  Rejoin '{ap_ssid}' in System Settings → Wi-Fi if your Mac")
+    print("     doesn't reconnect on its own.\n")
     print("  Waiting for puck to reboot (up to 90 seconds)...")
     time.sleep(15)
     for i in range(15):
@@ -356,7 +361,8 @@ def check_and_update_firmware(puck_props):
         print(f"  ... waiting ({i+1}/15)")
         time.sleep(5)
 
-    print("  ⚠  Puck did not come back. You may need to re-enter pairing mode.")
+    print(f"  ⚠  Puck did not come back. Make sure your Mac is on '{ap_ssid}';")
+    print("     if that network is gone, hold the button to re-enter pairing mode.")
     return True
 
 
