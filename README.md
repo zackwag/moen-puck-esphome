@@ -1,4 +1,4 @@
-# moen-puck-esphome
+# moen-puck-tools
 
 Tools for the Moen Smart Leak Detector ("puck"):
 

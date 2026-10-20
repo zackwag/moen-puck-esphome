@@ -1,6 +1,6 @@
 # ESPHome on the Moen puck — findings
 
-Notes from running [ESPHome](https://esphome.io) on the Moen Smart Leak Detector ("puck") instead of Moen's cloud firmware. This repo no longer ships an ESPHome build. The last working config is [`moen-puck.yaml` at ce2dd93](https://github.com/zackwag/moen-puck-esphome/blob/ce2dd93da69b3409c99f29c5a351113999bc165e/moen-puck.yaml).
+Notes from running [ESPHome](https://esphome.io) on the Moen Smart Leak Detector ("puck") instead of Moen's cloud firmware. This repo no longer ships an ESPHome build. The last working config is [`moen-puck.yaml` at ce2dd93](https://github.com/zackwag/moen-puck-tools/blob/ce2dd93da69b3409c99f29c5a351113999bc165e/moen-puck.yaml).
 
 **Status:** water detection, battery, LEDs, buzzer and the button work. **Temperature and humidity are unsolved.**
 
