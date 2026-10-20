@@ -6,8 +6,10 @@
 # GitHub Actions allowed to open PRs (for release-please), and branch
 # protection on the default branch matching the pattern used across
 # the account (no force pushes, no deletions, admins included, no required
-# PR review — direct pushes to the default branch stay allowed, but are
-# linted by the same check via its `push` trigger).
+# PR review). Because the Conventional Commits check is required, direct
+# pushes to the default branch are rejected, so changes land through PRs.
+# Private repos on a free plan get no branch protection (see below), so
+# direct pushes still work there.
 #
 # Usage:
 #   ./scripts/configure-repo.sh                      # infer repo from current git remote
