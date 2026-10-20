@@ -1,5 +1,23 @@
 # Changelog
 
+## [4.0.0](https://github.com/zackwag/moen-puck-tools/compare/v3.0.0...v4.0.0) (2026-10-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* repurpose repo for puck onboarding and stock firmware ([#1](https://github.com/zackwag/moen-puck-tools/issues/1))
+
+### Features
+
+* ESPHome firmware for Moen Smart Leak Detector ([ce2dd93](https://github.com/zackwag/moen-puck-tools/commit/ce2dd93da69b3409c99f29c5a351113999bc165e))
+* repurpose repo for puck onboarding and stock firmware ([#1](https://github.com/zackwag/moen-puck-tools/issues/1)) ([7d365a2](https://github.com/zackwag/moen-puck-tools/commit/7d365a2c2e9184561388e54a5d671954f97f815b))
+
+
+### Miscellaneous Chores
+
+* allow GitHub Actions to open PRs in configure-repo.sh ([#2](https://github.com/zackwag/moen-puck-tools/issues/2)) ([39e2c71](https://github.com/zackwag/moen-puck-tools/commit/39e2c71c523c9a4232e2b9fe3cec0fc631b3f811))
+* remove configure-repo.sh ([#4](https://github.com/zackwag/moen-puck-tools/issues/4)) ([5fd3607](https://github.com/zackwag/moen-puck-tools/commit/5fd3607b90ebb05eea5b5d14c4f73e8f152670fe))
+
 ## [3.0.0](https://github.com/zackwag/moen-puck-esphome/releases/tag/v3.0.0) (2026-10-14)
 
 ### Features
