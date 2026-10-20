@@ -78,4 +78,3 @@ While in pairing mode, the puck serves `http://192.168.4.1/puck/v1/` on its own 
 | `moen_puck_onboard.py` | Onboard a puck to Moen Flo from a Mac |
 | `puck_fw_update.py` | Push stock firmware over the puck's AP |
 | `ESPHOME.md` | ESPHome hardware findings and open problems |
-| `scripts/configure-repo.sh` | GitHub repo settings (squash-merge, branch protection) |
