@@ -2,8 +2,9 @@
 # Applies zackwag's standard repo settings to a repo generated from this
 # template: squash-merge-only (with the PR title always used as the squash
 # commit message, so Conventional Commits formatting actually lands in
-# history), the Conventional Commits check as a required status check, and
-# branch protection on the default branch matching the pattern used across
+# history), the Conventional Commits check as a required status check,
+# GitHub Actions allowed to open PRs (for release-please), and branch
+# protection on the default branch matching the pattern used across
 # the account (no force pushes, no deletions, admins included, no required
 # PR review — direct pushes to the default branch stay allowed, but are
 # linted by the same check via its `push` trigger).
@@ -44,6 +45,11 @@ gh api -X PATCH "repos/$REPO" \
 gh api -X PUT "repos/$REPO/vulnerability-alerts" >/dev/null 2>&1 || true
 gh api -X PUT "repos/$REPO/automated-security-fixes" >/dev/null 2>&1 || true
 gh api -X PATCH "repos/$REPO" -f 'security_and_analysis[secret_scanning][status]=enabled' >/dev/null 2>&1 || true
+
+# --- Actions: let workflows open PRs (release-please needs this) ---
+gh api -X PUT "repos/$REPO/actions/permissions/workflow" \
+  -f default_workflow_permissions=read \
+  -F can_approve_pull_request_reviews=true >/dev/null
 
 # --- Branch protection ---
 if [ "${#CHECKS[@]}" -gt 0 ]; then
